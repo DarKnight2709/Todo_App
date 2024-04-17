@@ -80,45 +80,47 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
 
 
-    return Scaffold(  
-      appBar: AppBar(
-        title: const Text(
-          'TODO',
-          style: TextStyle(color: Colors.white),
-        ),
-        backgroundColor: Colors.blue,
-        centerTitle: true,
-      
-      ),
-      body:  ListView.builder(
-        itemBuilder: (context, index) {
-          return TodoTile(
-            value: db.toDoList[index][1],
-            onChanged: (value) => onChanged(value, index),
-            task: db.toDoList[index][0],
-            deleteTask: () => deleteTask(index),
-            controller: _controller,
-          );
-        },
-        itemCount: db.toDoList.length,
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-            showDialog(
-              context: context, 
-              builder: (context) =>  MyDialog(
-                saveNewTask: () {saveNewTask();},
-                controller: _controller,
-                
-              )
-            );
-        },
-        backgroundColor: Theme.of(context).primaryColor,
-        elevation: 0,
-        shape: const CircleBorder(),
-        child: const Icon(Icons.add),
-      )        
+    return MaterialApp(
+      home: Scaffold(  
+        appBar: AppBar(
+          title: const Text(
+            'TODO',
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.blue,
+          centerTitle: true,
         
+        ),
+        body:  ListView.builder(
+          itemBuilder: (context, index) {
+            return TodoTile(
+              value: db.toDoList[index][1],
+              onChanged: (value) => onChanged(value, index),
+              task: db.toDoList[index][0],
+              deleteTask: () => deleteTask(index),
+              controller: _controller,
+            );
+          },
+          itemCount: db.toDoList.length,
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+              showDialog(
+                context: context, 
+                builder: (context) =>  MyDialog(
+                  saveNewTask: () {saveNewTask();},
+                  controller: _controller,
+                  
+                )
+              );
+          },
+          backgroundColor: Theme.of(context).primaryColor,
+          elevation: 0,
+          shape: const CircleBorder(),
+          child: const Icon(Icons.add),
+        )        
+          
+      ),
     );
   }
 }
