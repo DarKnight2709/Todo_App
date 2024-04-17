@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                 )
               );
           },
-          backgroundColor: Theme.of(context).primaryColor,
+       
           elevation: 0,
           shape: const CircleBorder(),
           child: const Icon(Icons.add),
