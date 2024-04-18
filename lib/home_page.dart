@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
 
   
   final _controller = TextEditingController();
+  final _controller_2 = TextEditingController();
 
 
   @override
@@ -73,7 +74,18 @@ class _HomePageState extends State<HomePage> {
   void editTask(int index){
     setState(() {
       
+
+      
     });
+  }
+
+  void updateTask(int index){
+    setState(() {
+      db.toDoList[index][0] = _controller_2.text;
+      _controller_2.clear();
+    });
+    Navigator.of(context).pop();
+    db.updateDataBase();
   }
 
   @override
@@ -98,7 +110,8 @@ class _HomePageState extends State<HomePage> {
               onChanged: (value) => onChanged(value, index),
               task: db.toDoList[index][0],
               deleteTask: () => deleteTask(index),
-              controller: _controller,
+              updateTask: () => updateTask(index),
+              controller: _controller_2,
             );
           },
           itemCount: db.toDoList.length,

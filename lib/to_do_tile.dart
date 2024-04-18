@@ -7,6 +7,7 @@ class TodoTile extends StatelessWidget {
       required this.onChanged,
       required this.task,
       required this.deleteTask,
+      required this.updateTask,
       required this.controller,z
       
       });
@@ -14,7 +15,8 @@ class TodoTile extends StatelessWidget {
   final bool value;
   final Function(bool?)? onChanged;
   final String task;
-  final Function deleteTask;
+  final Function() deleteTask;
+  final Function() updateTask;
   final TextEditingController controller;
   
 
@@ -22,7 +24,6 @@ class TodoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    controller.text = task;
     return Padding(
       padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
       child: Container(
@@ -31,7 +32,6 @@ class TodoTile extends StatelessWidget {
         child: Row(
           children: [
             Checkbox(value: value, onChanged: onChanged),
-            
             Text(
               task,
               style: TextStyle(
@@ -52,6 +52,7 @@ class TodoTile extends StatelessWidget {
 
             IconButton(
               onPressed: (){
+                controller.text = task;
                 showDialog(
                   context: context, 
                   builder: (context) {
@@ -65,10 +66,21 @@ class TodoTile extends StatelessWidget {
                               controller: controller,
                               decoration: InputDecoration(
                                 hintText: 'Edit Task',
-                                suffixIcon: IconButton(onPressed: (){controller.clear();}, icon: const Icon(Icons.clear))
+                                suffixIcon: IconButton(
+                                  onPressed: (){
+                                    controller.clear();
+                                  }, 
+                                  icon: const Icon(Icons.clear))
                               ),
                               
-                            )
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+
+                            TextButton(
+                              onPressed: updateTask,
+                              child: const Text("Update")),
                           ],
                         ),
 
@@ -83,9 +95,7 @@ class TodoTile extends StatelessWidget {
               icon: const Icon(Icons.edit),
             ),
             IconButton(
-              onPressed: (){
-                deleteTask();
-              }, 
+              onPressed: deleteTask, 
               icon: const Icon(Icons.delete)
             ),
           ],
