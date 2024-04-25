@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:todo_app/database.dart';
-import 'package:todo_app/to_do_tile.dart';
-import 'package:todo_app/my_dialog.dart';
+import 'package:todo_app/data/database.dart';
+import 'package:todo_app/util/to_do_tile.dart';
+import 'package:todo_app/util/my_dialog.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -71,13 +71,7 @@ class _HomePageState extends State<HomePage> {
     db.updateDataBase();
   }
 
-  void editTask(int index){
-    setState(() {
-      
 
-      
-    });
-  }
 
   void updateTask(int index){
     setState(() {
@@ -94,6 +88,7 @@ class _HomePageState extends State<HomePage> {
 
     return MaterialApp(
       home: Scaffold(  
+        backgroundColor: Colors.blue[200],
         appBar: AppBar(
           title: const Text(
             'TODO',
@@ -121,7 +116,7 @@ class _HomePageState extends State<HomePage> {
               showDialog(
                 context: context, 
                 builder: (context) =>  MyDialog(
-                  saveNewTask: () {saveNewTask();},
+                  saveNewTask: saveNewTask,
                   controller: _controller,
                   
                 )

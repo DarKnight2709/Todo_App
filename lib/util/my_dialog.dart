@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class MyDialog extends StatelessWidget {
   const MyDialog({super.key, required this.saveNewTask, required this.controller}) ;
 
-  final Function saveNewTask;
+  final VoidCallback saveNewTask;
 
   final TextEditingController controller;
 
@@ -14,11 +14,13 @@ class MyDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       alignment: Alignment.center,
+      backgroundColor: Colors.blue[300],
       
       title:  const Text('Add Task'),
       content:  SizedBox(
         height: 120,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TextField(
               controller: controller,
@@ -34,6 +36,7 @@ class MyDialog extends StatelessWidget {
                 ),
               ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton(onPressed: () {
                   if(controller.text.isEmpty){
